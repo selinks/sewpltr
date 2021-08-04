@@ -140,20 +140,20 @@
 
 ; ------------  Testing tools --------------
 
-(define dbc-print #f)
+(define dbc-print #t)
 
 (define dbc
   (lambda (tag)
     (begin (when dbc-print (display tag)) #t)))
 
 (define cc-test
-  (lambda (tm val)
+  (lambda (cc-red tm val)
     (test-->> cc-red
               (term (,tm ()))
               (term (,val ())))))
 
 (define test-basics
-  (lambda () (run-basic-tests cc-test)))
+  (lambda () (run-basic-tests cc-red cc-test)))
 
 (define (test-catch)
   (handler-red-test cc-red cc-test))
